@@ -20,7 +20,6 @@ import java.util.Random;
 public class VolController {
 
     @GetMapping
-    @Secured("permitAll")
     public ResponseEntity getAllVol() {
         List<Vol> vols = this.getRandoms() ;
         return new ResponseEntity(vols, HttpStatus.OK);

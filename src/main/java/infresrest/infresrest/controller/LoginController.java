@@ -74,10 +74,18 @@ public class LoginController {
 
             ResponseEntity<Map> response = restTemplate.exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
             Map userAttributes = response.getBody();
-            System.out.println(userAttributes);
             model.addAttribute("name", userAttributes.get("name"));
         }
 
         return "loginSuccess";
     }
+
+    @GetMapping("/loggedUser")
+    public String getUser(Model model, Principal principal) {
+        System.out.println(principal);
+        model.addAttribute("principal", principal);
+        return "loggedUser";
+    }
+
+
 }
