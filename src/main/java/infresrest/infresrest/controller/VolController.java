@@ -4,6 +4,8 @@ import infresrest.infresrest.model.Company;
 import infresrest.infresrest.model.Vol;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,9 @@ import java.util.Random;
 public class VolController {
 
     @GetMapping
-    public ResponseEntity<List<Vol>> getAllVol() {
-        Vol vol = this.getRandom() ;
+    public ResponseEntity<List<Vol>> getAllVol(@AuthenticationPrincipal OAuth2User oauth2User) {
+        Vol vol = this.getRandom();
+        System.out.println(oauth2User.getName());
         return new ResponseEntity(vol, HttpStatus.OK);
     }
 
