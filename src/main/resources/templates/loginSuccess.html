@@ -2,14 +2,20 @@
 <html>
 <head>
     <title>Login Success</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
 </head>
 <body>
 <h3>
     <div class="label label-info">
         Welcome, <span th:text="${name}">user</span>!
+    </div>
+    <div>
+
+        <a href="/logout" class="active">Logout</a>
+        <a href="/vol" class="active">Vols</a>
+
     </div>
 </h3>
 </body>

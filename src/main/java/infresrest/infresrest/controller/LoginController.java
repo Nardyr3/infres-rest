@@ -54,16 +54,6 @@ public class LoginController {
         return "oauth_login2";
     }
 
-
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/vol";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
-    }
-
     @GetMapping("/loginSuccess")
     public String getLoginInfo(Model model, OAuth2AuthenticationToken authentication) {
 
@@ -84,6 +74,7 @@ public class LoginController {
 
             ResponseEntity<Map> response = restTemplate.exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
             Map userAttributes = response.getBody();
+            System.out.println(userAttributes);
             model.addAttribute("name", userAttributes.get("name"));
         }
 

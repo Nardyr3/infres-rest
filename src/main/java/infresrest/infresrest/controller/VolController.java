@@ -4,6 +4,7 @@ import infresrest.infresrest.model.Company;
 import infresrest.infresrest.model.Vol;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,14 @@ import java.util.Random;
 public class VolController {
 
     @GetMapping
+    @Secured("permitAll")
     public ResponseEntity getAllVol() {
+        List<Vol> vols = this.getRandoms() ;
+        return new ResponseEntity(vols, HttpStatus.OK);
+    }
+
+    @GetMapping("/no_auth")
+    public ResponseEntity getAllVolNoAuth() {
         List<Vol> vols = this.getRandoms() ;
         return new ResponseEntity(vols, HttpStatus.OK);
     }
