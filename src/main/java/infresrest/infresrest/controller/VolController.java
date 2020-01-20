@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,21 +19,28 @@ import java.util.Random;
 public class VolController {
 
     @GetMapping
-    public ResponseEntity<List<Vol>> getAllVol() {
-        Vol vol = this.getRandom() ;
-        return new ResponseEntity(vol, HttpStatus.OK);
+    public ResponseEntity getAllVol() {
+        List<Vol> vols = this.getRandoms() ;
+        return new ResponseEntity(vols, HttpStatus.OK);
     }
 
 
-
+    private List<Vol> getRandoms(){
+        ArrayList<Vol> vols = new ArrayList<>();
+        Random random = new Random();
+        for(int i=0; i<random.nextInt(5)+1; i++){
+            vols.add(this.getRandom());
+        }
+        return vols;
+    }
 
     private Vol getRandom(){
         Random random = new Random();
         Vol vol = new Vol();
-        int place = random.nextInt((200 - 0) + 1);
-        int id = random.nextInt((200 - 0) + 1);
+        int place = random.nextInt((200) + 1);
+        int id = random.nextInt((200) + 1);
         LocalDateTime dateVol = LocalDateTime.now();
-        dateVol = dateVol.minus(random.nextInt((10-0)+1), ChronoUnit.DAYS);
+        dateVol = dateVol.minus(random.nextInt((10)+1), ChronoUnit.DAYS);
         vol.setCompany(Company.randomEnum());
         vol.setDate(dateVol);
         vol.setPlace(place);
