@@ -21,7 +21,7 @@ public class VolController {
     @GetMapping
     public ResponseEntity getAllVol() {
         List<Vol> vols = this.getRandoms() ;
-        return new ResponseEntity(vols, HttpStatus.OK);
+        return  new ResponseEntity(vols, HttpStatus.OK);
     }
 
 
