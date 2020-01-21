@@ -5,6 +5,7 @@ import infresrest.infresrest.model.Vol;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,12 +19,15 @@ import java.util.Random;
 @RequestMapping(path = "/vol")
 public class VolController {
 
-    @GetMapping
-    public ResponseEntity getAllVol() {
-        List<Vol> vols = this.getRandoms() ;
-        return  new ResponseEntity(vols, HttpStatus.OK);
-    }
 
+    @GetMapping()
+    public String getAllVolNoAuth(Model model) {
+        Iterable<Vol> vols = null;
+        vols = this.getRandoms();
+        model.addAttribute("vols", vols);
+
+        return "vol";
+    }
 
     private List<Vol> getRandoms(){
         ArrayList<Vol> vols = new ArrayList<>();
